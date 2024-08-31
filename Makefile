@@ -47,13 +47,23 @@ run: $(JAR_FILE) ## Run the Spring Boot application locally.
 docker-build: ## Build the Docker image for the Spring Boot application, tagged with the project version.
 	$(DOCKER) build -t $(DOCKER_IMAGE) .
 
+.PHONY: docker-test
+docker-test: ## Run the Docker container for the Spring Boot application.
+	$(DOCKER_COMPOSE) -f test.compose.yml run --rm test; \
+		rc=$$?; \
+		${DOCKER_COMPOSE} down -v; \
+		exit $$rc
+
 .PHONY: docker-run
-docker-run: docker-stop ## Run the Docker container for the Spring Boot application.
-	$(DOCKER_COMPOSE) up
+docker-run: ## Run the Docker container for the Spring Boot application.
+	$(DOCKER_COMPOSE) up; \
+	rc=$$?; \
+		${DOCKER_COMPOSE} down -v; \
+		exit $$rc
 
 .PHONY: docker-stop
 docker-stop: ## Stop the Docker container for the Spring Boot application.
-	$(DOCKER_COMPOSE) down
+	$(DOCKER_COMPOSE) down -v
 
 ##@ Help
 

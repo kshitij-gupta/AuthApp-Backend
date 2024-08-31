@@ -10,6 +10,8 @@ COPY .mvn .mvn
 COPY src src
 RUN mvn package -Dmaven.test.skip
 
+FROM build AS test
+
 # Setup Application
 FROM openjdk:17-alpine
 RUN addgroup -S authapp && adduser -S authapp -G authapp

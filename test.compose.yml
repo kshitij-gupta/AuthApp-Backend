@@ -1,0 +1,7 @@
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+    command: "./mvnw test"
