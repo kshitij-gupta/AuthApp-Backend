@@ -11,8 +11,12 @@ DOCKER_CONTAINER := $(PROJECT_NAME)_container
 # Commands
 MVN := ./mvnw
 JAVA := java
-DOCKER := sudo docker
-DOCKER_COMPOSE := sudo docker compose
+ifeq ($(ROOTLESS),true)
+    DOCKER := docker
+else
+    DOCKER := sudo docker
+endif
+DOCKER_COMPOSE := ${DOCKER} compose
 
 # Default target
 
