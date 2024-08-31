@@ -62,7 +62,7 @@ public class AuthControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.content().string("Invalid Request body: User was not creadted."));
+                .andExpect(MockMvcResultMatchers.content().string("Invalid Request body: User was not created."));
     }
 
     @Test
